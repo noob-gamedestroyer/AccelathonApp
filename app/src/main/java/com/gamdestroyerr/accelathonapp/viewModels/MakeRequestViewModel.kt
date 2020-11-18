@@ -1,4 +1,4 @@
-package com.gamdestroyerr.accelathonapp
+package com.gamdestroyerr.accelathonapp.viewModels
 
 import androidx.lifecycle.ViewModel
 

@@ -32,6 +32,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         android:importantForAutofill="no" />
 
+    <TextView
+        android:id="@+id/chooseNgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:text="Add NGO"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText"
+        app:drawableEndCompat="@drawable/ic_round_arrow_drop_down_circle_24" />
+
     <ImageView
         android:id="@+id/image_ngo"
         android:layout_width="match_parent"
@@ -40,7 +53,8 @@
         android:src="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/chooseNgo" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton"
