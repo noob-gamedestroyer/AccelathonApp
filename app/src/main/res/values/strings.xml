@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AccelathonApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_nav">HomeNav</string>
+    <string name="communities_nav">CommunitiesNav</string>
+    <string name="add_fab">addFab</string>
+    <string name="home">Home</string>
+    <string name="community">Community</string>
+    <string name="what_do_you_want_to_request">What do you want to request?</string>
+    <string name="ask_your_fellow_community_members_anything">Ask your fellow community members anything…</string>
+    <string name="share_with_residents">Share with Residents</string>
+    <string name="share_with_nearby_ngos">Share with Nearby NGOs</string>
+    <string name="enter_the_items_to_donate">Enter the Items To donate…</string>
+    <string name="enter_list_items_with_quantity">Enter list items with quantity…</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:label="fragment_home"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_makeRequestFragment"
+            app:destination="@id/makeRequestFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/communitiesFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.CommunitiesFragment"
+        android:label="fragment_communities"
+        tools:layout="@layout/fragment_communities" >
+        <action
+            android:id="@+id/action_communitiesFragment_to_makeRequestFragment"
+            app:destination="@id/makeRequestFragment" />
+        <action
+            android:id="@+id/action_communitiesFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeRequestFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.MakeRequestFragment"
+        android:label="make_request_fragment"
+        tools:layout="@layout/make_request_fragment" />
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.ShareFragment"
+        android:label="fragment_share"
+        tools:layout="@layout/fragment_share" />
+</navigation>
