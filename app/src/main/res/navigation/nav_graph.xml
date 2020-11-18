@@ -39,5 +39,14 @@
         android:id="@+id/shareFragment"
         android:name="com.gamdestroyerr.accelathonapp.views.fragments.ShareFragment"
         android:label="fragment_share"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_share">
+        <action
+            android:id="@+id/action_shareFragment_to_shareToNgoFragment"
+            app:destination="@id/shareToNgoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareToNgoFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.ShareToNgoFragment"
+        android:label="share_to_ngo_fragment"
+        tools:layout="@layout/share_to_ngo_fragment" />
 </navigation>

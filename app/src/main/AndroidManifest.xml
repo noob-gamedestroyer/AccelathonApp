@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccelathonApp">
-        <activity android:name=".views.activity.MainActivity">
+
+        <activity android:name=".views.activity.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".views.activity.MainActivity"
+            android:label="@string/activity_main" />
     </application>
 
 </manifest>
