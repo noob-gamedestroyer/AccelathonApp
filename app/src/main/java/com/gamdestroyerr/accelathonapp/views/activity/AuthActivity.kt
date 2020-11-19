@@ -6,7 +6,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.ActivityAuthBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
     private lateinit var authBinding: ActivityAuthBinding
     private lateinit var navController: NavController

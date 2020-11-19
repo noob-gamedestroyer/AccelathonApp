@@ -11,10 +11,6 @@ import com.gamdestroyerr.accelathonapp.viewModels.ShareToNgoViewModel
 
 class ShareToNgoFragment : Fragment() {
 
-//    companion object {
-//        fun newInstance() = ShareToNgoFragment()
-//    }
-
     private lateinit var viewModel: ShareToNgoViewModel
 
     override fun onCreateView(
