@@ -31,9 +31,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         registerBinding.signUpBtn.setOnClickListener {
             viewModel.register(
-                    registerBinding.emailTxtRegister.editText?.text.toString().trim(),
-                    registerBinding.nameTxt.editText?.text.toString(),
-                    registerBinding.setPasswordTxtInput.editText?.text.toString().trim(),
+                registerBinding.emailTxtRegister.editText?.text.toString().trim(),
+                registerBinding.nameTxt.editText?.text.toString(),
+                registerBinding.setPasswordTxtInput.editText?.text.toString().trim(),
+                registerBinding.phoneTxtInputLayout.editText?.text.toString().trim(),
+                registerBinding.apartmentTxtInputLayout.editText?.text.toString(),
+                registerBinding.wingTxtInputLayout.editText?.text.toString(),
+                registerBinding.flatTxtInputLayout.editText?.text.toString(),
             )
         }
     }

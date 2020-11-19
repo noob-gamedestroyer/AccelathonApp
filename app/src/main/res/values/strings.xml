@@ -33,4 +33,5 @@
     <string name="enter_apartment_name">Enter Apartment Name</string>
     <string name="enter_wing_name">Enter Wing Number</string>
     <string name="enter_flat_name">Enter Flat Details</string>
+    <string name="wing_no">Wing %1$s</string>
 </resources>

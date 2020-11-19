@@ -13,14 +13,15 @@
 
         <TextView
             android:id="@+id/RegisterTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="10dp"
             android:text="@string/register"
             android:textAppearance="?attr/textAppearanceHeadline3"
             android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,7 +127,8 @@
             android:layout_marginEnd="20dp"
             android:hint="@string/enter_phone_number"
             app:boxBackgroundMode="outline"
-            app:counterMaxLength="8"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
@@ -140,7 +142,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:maxLength="8"
+                android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,7 +157,6 @@
             android:layout_marginEnd="20dp"
             android:hint="@string/enter_apartment_name"
             app:boxBackgroundMode="outline"
-            app:counterMaxLength="8"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
@@ -183,7 +185,6 @@
             android:layout_marginEnd="20dp"
             android:hint="@string/enter_wing_name"
             app:boxBackgroundMode="outline"
-            app:counterMaxLength="8"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
@@ -209,9 +210,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:paddingBottom="20dp"
             android:hint="@string/enter_flat_name"
             app:boxBackgroundMode="outline"
-            app:counterMaxLength="8"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
@@ -235,14 +236,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            app:backgroundTint="@android:color/white"
+            app:strokeColor="@color/purple_500"
+            app:strokeWidth="1dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="8dp"
+            app:cornerRadius="40dp"
             android:focusable="false"
             android:paddingLeft="21dp"
             android:paddingRight="21dp"
             android:text="@string/register"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/flatTxtInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/flatTxtInputLayout"
-            app:layout_constraintTop_toBottomOf="@id/flatTxtInputLayout" />
+            android:textColor="@color/purple_500"
+            app:layout_constraintBottom_toBottomOf="@+id/RegisterTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/RegisterTextView" />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"
@@ -251,9 +258,9 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
-            app:layout_constraintStart_toStartOf="@+id/signUpBtn"
-            app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegisterTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

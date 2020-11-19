@@ -40,7 +40,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
                 bottomSheetView.apply {
                     bindingDialog.ask.setOnClickListener {
-                        navController.navigate(R.id.action_homeFragment_to_makeRequestFragment)
+                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToMakeRequestFragment())
                         bottomSheetDialog.dismiss()
                     }
                     bindingDialog.share.setOnClickListener {

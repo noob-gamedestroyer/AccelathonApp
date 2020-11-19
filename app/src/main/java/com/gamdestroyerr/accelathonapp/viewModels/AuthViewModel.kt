@@ -41,8 +41,24 @@ class AuthViewModel @ViewModelInject constructor(
         }
     }
 
-    fun register(email: String, username: String, password: String) {
-        val error = if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+    fun register(
+        email: String,
+        username: String,
+        password: String,
+        phoneNumber: String,
+        apartment: String,
+        wing: String,
+        flat: String,
+    ) {
+        val error = if (
+            email.isEmpty() ||
+            username.isEmpty() ||
+            password.isEmpty() ||
+            phoneNumber.isEmpty() ||
+            apartment.isEmpty() ||
+            wing.isEmpty() ||
+            flat.isEmpty()
+        ) {
             applicationContext.getString(R.string.error_input_empty)
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             applicationContext.getString(R.string.error_not_a_valid_email)
@@ -55,7 +71,15 @@ class AuthViewModel @ViewModelInject constructor(
         _registerStatus.postValue(Event(Resource.Loading()))
 
         viewModelScope.launch(dispatchers) {
-            val result = repository.register(email, username, password)
+            val result = repository.register(
+                email,
+                username,
+                password,
+                phoneNumber,
+                apartment,
+                wing,
+                flat,
+            )
             _registerStatus.postValue(Event(result))
         }
     }

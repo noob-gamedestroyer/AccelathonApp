@@ -27,7 +27,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:text="Wing no." />
+                android:text="@string/wing_no" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -41,7 +41,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"

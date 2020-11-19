@@ -16,15 +16,26 @@ class DefaultAuthRepository : AuthRepository {
     private val users = FirebaseFirestore.getInstance().collection("users")
 
     override suspend fun register(
-            email: String,
-            username: String,
-            password: String
+        email: String,
+        username: String,
+        password: String,
+        phoneNumber: String,
+        apartment: String,
+        wing: String,
+        flat: String,
     ): Resource<AuthResult> {
         return withContext(Dispatchers.IO) {
             safeCall {
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
                 val uid = result.user?.uid!!
-                val user = User(uid, username)
+                val user = User(
+                    uid,
+                    username,
+                    phoneNumber = phoneNumber,
+                    apartmentName = apartment,
+                    wingNo = wing,
+                    flatNo = flat,
+                )
                 users.document(uid).set(user).await()
                 Resource.Success(result)
             }

@@ -60,12 +60,12 @@
                 app:layout_constraintTop_toBottomOf="@id/requestEditText" />
 
             <ImageView
-                android:id="@+id/ImageView_request"
+                android:id="@+id/imageViewRequest"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="0dp"
                 android:layout_margin="10dp"
-                android:scaleType="fitCenter"
-                android:src="@android:color/darker_gray"
+                app:layout_constraintDimensionRatio="16:9"
+                android:background="@android:color/darker_gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_request_title" />
@@ -78,7 +78,7 @@
                 android:text="Add Image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ImageView_request" />
+                app:layout_constraintTop_toBottomOf="@id/imageViewRequest" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sendBtn"
@@ -89,7 +89,18 @@
                 android:text="send"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ImageView_request" />
+                app:layout_constraintTop_toBottomOf="@id/imageViewRequest" />
+
+            <ProgressBar
+                android:id="@+id/progressBarCreate"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
