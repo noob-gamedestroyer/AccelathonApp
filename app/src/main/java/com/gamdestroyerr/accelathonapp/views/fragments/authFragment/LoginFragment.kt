@@ -1,4 +1,4 @@
-package com.gamdestroyerr.accelathonapp.views.fragments
+package com.gamdestroyerr.accelathonapp.views.fragments.authFragment
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.gamdestroyerr.accelathonapp.views.fragments
+package com.gamdestroyerr.accelathonapp.views.fragments.mainFragment
 
 import android.os.Bundle
 import android.view.View

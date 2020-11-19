@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".views.fragments.RegisterFragment">
+    tools:context=".views.fragments.authFragment.RegisterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/enter_your_full_name"
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/email"
             app:boxBackgroundMode="outline"
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/set_password"
             app:boxBackgroundMode="outline"
@@ -115,6 +115,121 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneTxtInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/enter_phone_number"
+            app:boxBackgroundMode="outline"
+            app:counterMaxLength="8"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/setPasswordTxtInput"
+            app:layout_constraintStart_toStartOf="@+id/setPasswordTxtInput"
+            app:layout_constraintTop_toBottomOf="@+id/setPasswordTxtInput"
+            app:startIconDrawable="@drawable/ic_round_local_phone_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/apartmentTxtInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/enter_apartment_name"
+            app:boxBackgroundMode="outline"
+            app:counterMaxLength="8"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/phoneTxtInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/phoneTxtInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/phoneTxtInputLayout"
+            app:startIconDrawable="@drawable/ic_round_business_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/wingTxtInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/enter_wing_name"
+            app:boxBackgroundMode="outline"
+            app:counterMaxLength="8"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/apartmentTxtInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/apartmentTxtInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/apartmentTxtInputLayout"
+            app:startIconDrawable="@drawable/ic_round_business_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/flatTxtInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/enter_flat_name"
+            app:boxBackgroundMode="outline"
+            app:counterMaxLength="8"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/wingTxtInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/wingTxtInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/wingTxtInputLayout"
+            app:startIconDrawable="@drawable/ic_round_business_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signUpBtn"
             android:layout_width="wrap_content"
@@ -124,9 +239,10 @@
             android:paddingLeft="21dp"
             android:paddingRight="21dp"
             android:text="@string/register"
-            app:layout_constraintEnd_toEndOf="@+id/setPasswordTxtInput"
-            app:layout_constraintStart_toStartOf="@+id/setPasswordTxtInput"
-            app:layout_constraintTop_toBottomOf="@+id/setPasswordTxtInput" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/flatTxtInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/flatTxtInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/flatTxtInputLayout" />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"

@@ -29,4 +29,8 @@
     <string name="error_input_empty">Text fields cannot be empty</string>
     <string name="error_not_a_valid_email">Enter a valid email.</string>
     <string name="success_register">Successfully Registered. LogIn To Continue</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_apartment_name">Enter Apartment Name</string>
+    <string name="enter_wing_name">Enter Wing Number</string>
+    <string name="enter_flat_name">Enter Flat Details</string>
 </resources>
