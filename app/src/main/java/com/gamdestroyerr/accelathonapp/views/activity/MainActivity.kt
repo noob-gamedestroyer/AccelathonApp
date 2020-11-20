@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
-        binding.bottomNavBar.menu.getItem(1).isEnabled = false
+        binding.bottomNavBar.menu.getItem(2).isEnabled = false
         binding.bottomNavBar.setupWithNavController(navHostFragment.findNavController())
 
     }

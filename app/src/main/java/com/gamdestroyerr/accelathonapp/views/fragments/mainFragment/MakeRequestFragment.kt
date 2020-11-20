@@ -37,7 +37,7 @@ class MakeRequestFragment : Fragment(R.layout.make_request_fragment) {
     private val cropActivityResultContract = object : ActivityResultContract<String, Uri?>() {
         override fun createIntent(context: Context, input: String?): Intent {
             return CropImage.activity()
-                .setAspectRatio(16, 9)
+                    .setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .getIntent(requireContext())
         }

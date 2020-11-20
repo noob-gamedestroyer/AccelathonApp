@@ -49,4 +49,18 @@
         android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.ShareToNgoFragment"
         android:label="share_to_ngo_fragment"
         tools:layout="@layout/share_to_ngo_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_makeRequestFragment"
+            app:destination="@id/makeRequestFragment" />
+    </fragment>
 </navigation>
