@@ -1,4 +1,4 @@
-package com.gamdestroyerr.accelathonapp.viewModels
+package com.gamdestroyerr.accelathonapp.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,6 +28,7 @@ abstract class BasePostViewModel(
     val upVotedByUserStatus: LiveData<Event<Resource<List<User>>>> = _upVotedByUserStatus
 
     fun getUsers(uids: List<String>) {
+        if (uids.isEmpty()) return
         _upVotedByUserStatus.postValue(Event(Resource.Loading()))
         viewModelScope.launch(dispatcher) {
             val result = repository.getUsers(uids)

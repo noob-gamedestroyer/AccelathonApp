@@ -2,6 +2,7 @@ package com.gamdestroyerr.accelathonapp.repositories
 
 import android.net.Uri
 import android.util.Log
+import com.gamdestroyerr.accelathonapp.model.Comment
 import com.gamdestroyerr.accelathonapp.model.Post
 import com.gamdestroyerr.accelathonapp.model.User
 import com.gamdestroyerr.accelathonapp.util.Resource
@@ -117,7 +118,9 @@ class DefaultMainRepository : MainRepository {
 
     override suspend fun searchUser(query: String) = withContext(Dispatchers.IO) {
         safeCall {
-            val userResults = users.whereGreaterThanOrEqualTo("username", query.toUpperCase(Locale.ROOT))
+            val userResults = users.whereGreaterThanOrEqualTo(
+                    "username",
+                    query.toUpperCase(Locale.ROOT))
                     .get().await().toObjects(User::class.java)
             Resource.Success(userResults)
         }
@@ -130,7 +133,9 @@ class DefaultMainRepository : MainRepository {
             fireStore.runTransaction { transaction ->
                 val currentUser = transaction.get(users.document(currentUid)).toObject(User::class.java)!!
                 isFollowing = uid in currentUser.follows
-                val newFollows = if (isFollowing) currentUser.follows - uid else currentUser.follows + uid
+                val newFollows = if (isFollowing)
+                    currentUser.follows - uid
+                else currentUser.follows + uid
                 transaction.update(users.document(currentUid), "follows", newFollows)
 
             }.await()
@@ -164,6 +169,48 @@ class DefaultMainRepository : MainRepository {
             posts.document(post.id).delete().await()
             storage.getReferenceFromUrl(post.imageUrl).delete().await()
             Resource.Success(post)
+        }
+    }
+
+    override suspend fun createComment(commentText: String, postId: String) = withContext(Dispatchers.IO) {
+        safeCall {
+            val uid = auth.uid!!
+            val commentId = UUID.randomUUID().toString()
+            val user = getUser(uid).data!!
+            val comment = Comment(
+                    commentId,
+                    postId,
+                    uid,
+                    user.username,
+                    user.profilePicture,
+                    commentText,
+            )
+            comments.document(commentId).set(comment).await()
+            Resource.Success(comment)
+        }
+    }
+
+    override suspend fun getCommentsForPost(postId: String) = withContext(Dispatchers.IO) {
+        safeCall {
+            val commentForPost = comments
+                    .whereEqualTo("postId", postId)
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .get()
+                    .await()
+                    .toObjects(Comment::class.java)
+                    .onEach { comment ->
+                        val user = getUser(comment.uid).data!!
+                        comment.username = user.username
+                        comment.profilePictureUrl = user.profilePicture
+                    }
+            Resource.Success(commentForPost)
+        }
+    }
+
+    override suspend fun deleteComment(comment: Comment) = withContext(Dispatchers.IO) {
+        safeCall {
+            comments.document(comment.commentId).delete().await()
+            Resource.Success(comment)
         }
     }
 }

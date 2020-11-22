@@ -1,6 +1,7 @@
 package com.gamdestroyerr.accelathonapp.repositories
 
 import android.net.Uri
+import com.gamdestroyerr.accelathonapp.model.Comment
 import com.gamdestroyerr.accelathonapp.model.Post
 import com.gamdestroyerr.accelathonapp.model.User
 import com.gamdestroyerr.accelathonapp.util.Resource
@@ -24,4 +25,10 @@ interface MainRepository {
     suspend fun toggleFollowForUser(uid: String): Resource<Boolean>
 
     suspend fun searchUser(query: String): Resource<List<User>>
+
+    suspend fun getCommentsForPost(postId: String): Resource<List<Comment>>
+
+    suspend fun createComment(commentText: String, postId: String): Resource<Comment>
+
+    suspend fun deleteComment(comment: Comment): Resource<Comment>
 }

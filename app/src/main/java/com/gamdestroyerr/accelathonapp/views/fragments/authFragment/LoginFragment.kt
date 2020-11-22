@@ -13,7 +13,7 @@ import com.gamdestroyerr.accelathonapp.databinding.FragmentLoginBinding
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
 import com.gamdestroyerr.accelathonapp.util.toast
-import com.gamdestroyerr.accelathonapp.viewModels.AuthViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.AuthViewModel
 import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 

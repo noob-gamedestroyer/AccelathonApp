@@ -15,7 +15,7 @@ import com.gamdestroyerr.accelathonapp.databinding.FragmentSearchBinding
 import com.gamdestroyerr.accelathonapp.util.Constants.SEARCH_TIME_DELAY
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
-import com.gamdestroyerr.accelathonapp.viewModels.SearchViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.SearchViewModel
 import com.gamdestroyerr.accelathonapp.views.fragments.adapter.UserAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job

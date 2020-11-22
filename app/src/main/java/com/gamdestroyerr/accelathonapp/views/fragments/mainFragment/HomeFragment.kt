@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.FragmentAddOptionsModalDialogBinding
 import com.gamdestroyerr.accelathonapp.databinding.FragmentHomeBinding
-import com.gamdestroyerr.accelathonapp.viewModels.BasePostViewModel
-import com.gamdestroyerr.accelathonapp.viewModels.HomeViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.BasePostViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.HomeViewModel
 import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog

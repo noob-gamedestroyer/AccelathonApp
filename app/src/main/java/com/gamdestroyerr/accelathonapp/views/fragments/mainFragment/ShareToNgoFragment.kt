@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gamdestroyerr.accelathonapp.R
-import com.gamdestroyerr.accelathonapp.viewModels.ShareToNgoViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.ShareToNgoViewModel
 
 class ShareToNgoFragment : Fragment() {
 

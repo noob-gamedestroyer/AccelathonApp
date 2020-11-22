@@ -5,12 +5,16 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
+import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
-import com.gamdestroyerr.accelathonapp.viewModels.BasePostViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.BasePostViewModel
 import com.gamdestroyerr.accelathonapp.views.fragments.adapter.PostAdapter
-import com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.dialogs.DeletePostDialog
+import com.gamdestroyerr.accelathonapp.views.fragments.adapter.UserAdapter
+import com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.dialogFragment.DeletePostDialog
+import com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.dialogFragment.UpVotedByDialog
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
@@ -47,13 +51,24 @@ abstract class BasePostFragment(
                 }
             }.show(childFragmentManager, null)
         }
+
+        postAdapter.setOnUpVotedByClickListener { post ->
+            basePostViewModel.getUsers(post.upVotedBy)
+        }
+
+        postAdapter.setOnCommentsClickListener { post ->
+            findNavController().navigate(
+                    R.id.globalActionToCommentDialog,
+                    Bundle().apply { putString("postId", post.id) }
+            )
+        }
     }
 
     private fun subscribeToObserver() {
         basePostViewModel.upVotePostStatus.observe(viewLifecycleOwner, EventObserver(
                 onError = {
                     currentUpVoteIndex?.let { index ->
-                        postAdapter.posts[index].isUpVoting = false
+                        postAdapter.posts[index].isUpVoting = true
                         postAdapter.notifyItemChanged(index)
                     }
                     snackBar(it)
@@ -69,6 +84,7 @@ abstract class BasePostFragment(
                 val uid = FirebaseAuth.getInstance().uid!!
                 postAdapter.posts[index].apply {
                     this.isUpVoted = isUpVoted
+                    isUpVoting = false
                     if (isUpVoted) {
                         upVotedBy += uid
                     } else {
@@ -79,6 +95,13 @@ abstract class BasePostFragment(
             }
         })
 
+        basePostViewModel.upVotedByUserStatus.observe(viewLifecycleOwner, EventObserver(
+                onError = { snackBar(it) },
+        ) { userList ->
+            val userAdapter = UserAdapter(glide)
+            userAdapter.users = userList
+            UpVotedByDialog(userAdapter).show(childFragmentManager, null)
+        })
 
         basePostViewModel.deletePostStatus.observe(viewLifecycleOwner, EventObserver(
                 onError = {

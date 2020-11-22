@@ -11,7 +11,7 @@ import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.FragmentRegisterBinding
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
-import com.gamdestroyerr.accelathonapp.viewModels.AuthViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

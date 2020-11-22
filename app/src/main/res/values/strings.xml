@@ -48,4 +48,6 @@
     <string name="username">Username</string>
     <string name="no_description">No Description</string>
     <string name="unfollow">UnFollow</string>
+    <string name="enter_comment">Enter comment...</string>
+    <string name="todo">TODO</string>
 </resources>

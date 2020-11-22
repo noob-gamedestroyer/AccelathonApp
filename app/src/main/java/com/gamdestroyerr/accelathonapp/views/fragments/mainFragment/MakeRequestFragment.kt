@@ -16,7 +16,7 @@ import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.MakeRequestFragmentBinding
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
-import com.gamdestroyerr.accelathonapp.viewModels.MakeRequestViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.MakeRequestViewModel
 import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -43,10 +43,7 @@ class MakeRequestFragment : Fragment(R.layout.make_request_fragment) {
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
-            if (CropImage.getActivityResult(intent) != null) {
-                return CropImage.getActivityResult(intent).uri
-            }
-            return null
+            return CropImage.getActivityResult(intent)?.uri
         }
 
     }

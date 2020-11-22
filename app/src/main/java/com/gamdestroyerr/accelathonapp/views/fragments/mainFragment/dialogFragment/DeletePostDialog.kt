@@ -1,4 +1,4 @@
-package com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.dialogs
+package com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.dialogFragment
 
 import android.app.Dialog
 import android.os.Bundle
@@ -16,8 +16,8 @@ class DeletePostDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Do you want to delete this post?")
-                .setMessage("You can't undo this action.")
+                .setTitle("Delete Post?")
+                .setMessage("  You can't undo this action.")
                 .setIcon(R.drawable.ic_round_delete_24)
                 .setPositiveButton("Delete") { _, _ ->
                     positiveListener?.let { click ->

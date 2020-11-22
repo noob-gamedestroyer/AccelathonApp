@@ -12,8 +12,8 @@ import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.FragmentProfileBinding
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
-import com.gamdestroyerr.accelathonapp.viewModels.BasePostViewModel
-import com.gamdestroyerr.accelathonapp.viewModels.ProfileViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.BasePostViewModel
+import com.gamdestroyerr.accelathonapp.viewmodels.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 

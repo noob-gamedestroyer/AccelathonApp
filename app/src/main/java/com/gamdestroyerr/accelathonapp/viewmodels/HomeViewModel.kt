@@ -1,4 +1,4 @@
-package com.gamdestroyerr.accelathonapp.viewModels
+package com.gamdestroyerr.accelathonapp.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -20,7 +20,6 @@ class HomeViewModel @ViewModelInject constructor(
     private val _posts = MutableLiveData<Event<Resource<List<Post>>>>()
     override val posts: LiveData<Event<Resource<List<Post>>>>
         get() = _posts
-
 
     init {
         getPosts()
