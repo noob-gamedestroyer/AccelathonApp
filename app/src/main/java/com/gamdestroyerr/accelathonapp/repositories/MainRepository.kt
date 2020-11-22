@@ -14,4 +14,14 @@ interface MainRepository {
     suspend fun getUser(uid: String): Resource<User>
 
     suspend fun getPostForFollows(): Resource<List<Post>>
+
+    suspend fun toggleUpVoteForPost(post: Post): Resource<Boolean>
+
+    suspend fun deletePost(post: Post): Resource<Post>
+
+    suspend fun getPostForProfile(uid: String): Resource<List<Post>>
+
+    suspend fun toggleFollowForUser(uid: String): Resource<Boolean>
+
+    suspend fun searchUser(query: String): Resource<List<User>>
 }

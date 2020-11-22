@@ -38,7 +38,7 @@ class DefaultMainRepository : MainRepository {
                 apartmentName = it?.getString("apartmentName").toString()
                 wingNo = it?.getString("wingNo").toString()
             }.addOnFailureListener {
-                Log.d("TAG-ERROR", it.message.toString())
+                Log.d("TAG", "ID:TAG\t" + it.message.toString())
             }
             val imageUploadResult = storage.getReference(postId).putFile(imageUri).await()
             val imageUrl = imageUploadResult?.metadata?.reference?.downloadUrl?.await()
@@ -95,6 +95,75 @@ class DefaultMainRepository : MainRepository {
                         post.isUpVoted = uid in post.upVotedBy
                     }
             Resource.Success(allPosts)
+        }
+    }
+
+    override suspend fun getPostForProfile(uid: String) = withContext(Dispatchers.IO) {
+        safeCall {
+            val profilePosts = posts.whereEqualTo("authorUid", uid)
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .get()
+                    .await()
+                    .toObjects(Post::class.java)
+                    .onEach { post ->
+                        val user = getUser(post.authorUid).data!!
+                        post.authorProfilePicture = user.profilePicture
+                        post.authorUsername = user.username
+                        post.isUpVoted = uid in post.upVotedBy
+                    }
+            Resource.Success(profilePosts)
+        }
+    }
+
+    override suspend fun searchUser(query: String) = withContext(Dispatchers.IO) {
+        safeCall {
+            val userResults = users.whereGreaterThanOrEqualTo("username", query.toUpperCase(Locale.ROOT))
+                    .get().await().toObjects(User::class.java)
+            Resource.Success(userResults)
+        }
+    }
+
+    override suspend fun toggleFollowForUser(uid: String) = withContext(Dispatchers.IO) {
+        safeCall {
+            val currentUid = auth.uid!!
+            var isFollowing = false
+            fireStore.runTransaction { transaction ->
+                val currentUser = transaction.get(users.document(currentUid)).toObject(User::class.java)!!
+                isFollowing = uid in currentUser.follows
+                val newFollows = if (isFollowing) currentUser.follows - uid else currentUser.follows + uid
+                transaction.update(users.document(currentUid), "follows", newFollows)
+
+            }.await()
+            Resource.Success(!isFollowing)
+        }
+    }
+
+    override suspend fun toggleUpVoteForPost(post: Post) = withContext(Dispatchers.IO) {
+        safeCall {
+            var isUpVoted = false
+            fireStore.runTransaction { transaction ->
+                val uid = FirebaseAuth.getInstance().uid!!
+                val postResult = transaction.get(posts.document(post.id))
+                val currentUpVotes = postResult.toObject(Post::class.java)?.upVotedBy ?: listOf()
+                transaction.update(
+                        posts.document(post.id),
+                        "upVotedBy",
+                        if (uid in currentUpVotes) currentUpVotes - uid
+                        else {
+                            isUpVoted = true
+                            currentUpVotes + uid
+                        }
+                )
+            }.await()
+            Resource.Success(isUpVoted)
+        }
+    }
+
+    override suspend fun deletePost(post: Post) = withContext(Dispatchers.IO) {
+        safeCall {
+            posts.document(post.id).delete().await()
+            storage.getReferenceFromUrl(post.imageUrl).delete().await()
+            Resource.Success(post)
         }
     }
 }

@@ -63,4 +63,15 @@
             android:id="@+id/action_searchFragment_to_makeRequestFragment"
             app:destination="@id/makeRequestFragment" />
     </fragment>
+    <action
+        android:id="@+id/globalActionToOthersProfileFragment"
+        app:destination="@+id/othersProfileFragment" />
+    <fragment
+        android:id="@+id/othersProfileFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.OthersProfileFragment"
+        android:label="OthersProfileFragment">
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
 </navigation>

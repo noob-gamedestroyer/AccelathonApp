@@ -35,4 +35,17 @@
     <string name="enter_flat_name">Enter Flat Details</string>
     <string name="wing_no">Wing %1$s</string>
     <string name="search_here">Search Here...</string>
+    <string name="example_post_text">This is an Example post Request</string>
+    <string name="upVoted_by_spiderman_and_120_others">upVoted by Akhil and 120 others</string>
+    <string name="example_post_username">Iron Man</string>
+    <string name="delete">delete</string>
+    <string name="comments">comments</string>
+    <string name="upvote">upVote</string>
+    <string name="post_image">postImage</string>
+    <string name="posts">My Posts</string>
+    <string name="follow">Follow</string>
+    <string name="description">Description</string>
+    <string name="username">Username</string>
+    <string name="no_description">No Description</string>
+    <string name="unfollow">UnFollow</string>
 </resources>
