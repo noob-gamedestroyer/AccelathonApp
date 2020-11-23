@@ -53,7 +53,14 @@
         android:id="@+id/profileFragment"
         android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_makeRequestFragment"
+            app:destination="@id/makeRequestFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.SearchFragment"
@@ -62,6 +69,9 @@
         <action
             android:id="@+id/action_searchFragment_to_makeRequestFragment"
             app:destination="@id/makeRequestFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
     </fragment>
     <action
         android:id="@+id/globalActionToOthersProfileFragment"
@@ -69,6 +79,9 @@
     <action
         android:id="@+id/globalActionToCommentDialog"
         app:destination="@+id/commentDialog" />
+    <action
+        android:id="@+id/globalActionToSettingFragment"
+        app:destination="@+id/settingsFragment" />
     <fragment
         android:id="@+id/othersProfileFragment"
         android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.OthersProfileFragment"
@@ -85,4 +98,8 @@
             android:name="postId"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.gamdestroyerr.accelathonapp.views.fragments.mainFragment.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

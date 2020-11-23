@@ -45,7 +45,7 @@ class HomeFragment : BasePostFragment(R.layout.fragment_home) {
         setUpRecyclerView()
 
         activity.binding.addFab.apply {
-            show()
+            isEnabled = true
             setOnClickListener {
                 val bottomSheetDialog = BottomSheetDialog(
                         requireContext(),

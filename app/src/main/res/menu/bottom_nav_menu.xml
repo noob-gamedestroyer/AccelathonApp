@@ -16,12 +16,12 @@
 
     <item
         android:id="@+id/profileFragment"
-        android:title="profile"
+        android:title="Profile"
         android:icon="@drawable/ic_round_person_24" />
 
     <item
-        android:id="@+id/communitiesFragment"
-        android:title="Communities"
-        android:icon="@drawable/ic_round_business_24" />
+        android:id="@+id/settingsFragment"
+        android:title="Settings"
+        android:icon="@drawable/ic_round_settings_24" />
 
 </menu>

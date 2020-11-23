@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AccelathonApp</string>
+    <string name="app_name">Xenia</string>
     <string name="home_nav">HomeNav</string>
     <string name="communities_nav">CommunitiesNav</string>
     <string name="add_fab">addFab</string>
@@ -51,4 +51,7 @@
     <string name="enter_comment">Enter comment...</string>
     <string name="todo">TODO</string>
     <string name="enter_the_ngo_you_want_to_donate_to">Enter the NGO you want to donate to...</string>
+    <string name="edit_your_profile">Edit Your Profile</string>
+    <string name="profile_updated">Profile Updated</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

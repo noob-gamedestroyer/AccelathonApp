@@ -142,7 +142,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="8"
+                android:maxLength="10"
                 android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>

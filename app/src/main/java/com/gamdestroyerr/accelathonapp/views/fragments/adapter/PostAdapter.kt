@@ -48,19 +48,19 @@ class PostAdapter @Inject constructor(
         set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-    ): PostAdapter.PostViewHolder {
+        parent: ViewGroup,
+        viewType: Int
+    ): PostViewHolder {
         return PostViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                        R.layout.item_post,
-                        parent,
-                        false,
-                )
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_post,
+                parent,
+                false,
+            )
         )
     }
 
-    override fun onBindViewHolder(holder: PostAdapter.PostViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
         holder.apply {
             glide.load(post.imageUrl).into(ivPostImage)

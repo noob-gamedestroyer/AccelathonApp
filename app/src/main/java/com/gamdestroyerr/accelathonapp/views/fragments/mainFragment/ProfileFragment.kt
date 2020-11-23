@@ -9,11 +9,15 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gamdestroyerr.accelathonapp.R
+import com.gamdestroyerr.accelathonapp.databinding.FragmentAddOptionsModalDialogBinding
 import com.gamdestroyerr.accelathonapp.databinding.FragmentProfileBinding
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
 import com.gamdestroyerr.accelathonapp.viewmodels.BasePostViewModel
 import com.gamdestroyerr.accelathonapp.viewmodels.ProfileViewModel
+import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 open class ProfileFragment : BasePostFragment(R.layout.fragment_profile) {
 
     private lateinit var profileBinding: FragmentProfileBinding
+    private lateinit var bindingDialog: FragmentAddOptionsModalDialogBinding
     private lateinit var navController: NavController
 
     override val progressBarPost: ProgressBar
@@ -43,8 +48,41 @@ open class ProfileFragment : BasePostFragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileBinding = FragmentProfileBinding.bind(view)
+        bindingDialog = FragmentAddOptionsModalDialogBinding.inflate(layoutInflater)
+
         navController = Navigation.findNavController(view)
         profileBinding.profileMetaProgressBar.isVisible = false
+
+        val activity = activity as MainActivity
+
+        activity.binding.addFab.apply {
+            isEnabled = true
+            setOnClickListener {
+                val bottomSheetDialog = BottomSheetDialog(
+                    requireContext(),
+                    R.style.BottomSheetDialogTheme,
+                )
+                val bottomSheetView: View = bindingDialog.root
+
+                with(bottomSheetDialog) {
+                    setContentView(bottomSheetView)
+                    show()
+                }
+                bottomSheetView.post {
+                    bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+                bottomSheetView.apply {
+                    bindingDialog.ask.setOnClickListener {
+                        navController.navigate(ProfileFragmentDirections.actionProfileFragmentToMakeRequestFragment())
+                        bottomSheetDialog.dismiss()
+                    }
+                    bindingDialog.share.setOnClickListener {
+                        navController.navigate(R.id.action_profileFragment_to_shareFragment)
+                        bottomSheetDialog.dismiss()
+                    }
+                }
+            }
+        }
 
         setUpRecyclerView(profileBinding)
         subscribeToObservers()

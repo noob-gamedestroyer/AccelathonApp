@@ -17,7 +17,7 @@ class ShareFragment : Fragment(R.layout.fragment_share) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = activity as MainActivity
-        activity.binding.addFab.hide()
+        activity.binding.addFab.isEnabled = false
         shareBinding = FragmentShareBinding.bind(view)
         navController = Navigation.findNavController(view)
         shareBinding.shareWithNgoContainer.setOnClickListener {

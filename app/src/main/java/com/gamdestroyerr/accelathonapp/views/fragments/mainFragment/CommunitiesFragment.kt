@@ -23,7 +23,7 @@ class CommunitiesFragment: Fragment(R.layout.fragment_communities){
         val activity = activity as MainActivity
 
         activity.binding.addFab.apply {
-            show()
+            isEnabled = true
             setOnClickListener {
                 val bottomSheetDialog = BottomSheetDialog(
                     requireContext(),
