@@ -6,4 +6,9 @@
         android:id="@+id/miLogout"
         android:title="Logout"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="settings"
+        app:showAsAction="never" />
 </menu>

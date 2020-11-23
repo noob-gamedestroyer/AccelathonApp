@@ -16,6 +16,7 @@ import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.ShareToNgoFragmentBinding
 import com.gamdestroyerr.accelathonapp.util.EventObserver
 import com.gamdestroyerr.accelathonapp.util.snackBar
+import com.gamdestroyerr.accelathonapp.util.toast
 import com.gamdestroyerr.accelathonapp.viewmodels.ShareToNgoViewModel
 import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
 import com.theartofdev.edmodo.cropper.CropImage
@@ -90,15 +91,16 @@ class ShareToNgoFragment : Fragment(R.layout.share_to_ngo_fragment) {
             glide.load(curImageUri).into(ngoBinding.imageNgo)
         }
         viewModel.createNgoPostStatus.observe(viewLifecycleOwner, EventObserver(
-            onError = {
-                ngoBinding.progressBarNgo.isVisible = false
-                snackBar(it)
-            },
-            onLoading = {
-                ngoBinding.progressBarNgo.isVisible = true
-            },
+                onError = {
+                    ngoBinding.progressBarNgo.isVisible = false
+                    snackBar(it)
+                },
+                onLoading = {
+                    ngoBinding.progressBarNgo.isVisible = true
+                },
         ) {
             ngoBinding.progressBarNgo.isVisible = false
+            toast("Request sent to ${ngoBinding.etNgoList.text.toString()}")
             findNavController().popBackStack()
         })
     }

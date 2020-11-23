@@ -34,24 +34,27 @@ class DefaultMainRepository : MainRepository {
             val postId = UUID.randomUUID().toString()
             var apartmentName = ""
             var wingNo = ""
+            var username = ""
             val docRef = users.document(auth.uid!!.toString())
             docRef.get().addOnSuccessListener {
                 apartmentName = it?.getString("apartmentName").toString()
                 wingNo = it?.getString("wingNo").toString()
+                username = it?.getString("username").toString()
             }.addOnFailureListener {
                 Log.d("TAG", "ID:TAG\t" + it.message.toString())
-            }
+            }.await()
             val imageUploadResult = storage.getReference(postId).putFile(imageUri).await()
             val imageUrl = imageUploadResult?.metadata?.reference?.downloadUrl?.await()
-                .toString()
+                    .toString()
             val post = Post(
-                id = postId,
-                authorUid = uid,
-                text = text,
-                imageUrl = imageUrl,
-                date = System.currentTimeMillis(),
-                apartmentName = apartmentName,
-                wingNo = wingNo,
+                    id = postId,
+                    authorUid = uid,
+                    text = text,
+                    imageUrl = imageUrl,
+                    date = System.currentTimeMillis(),
+                    apartmentName = apartmentName,
+                    wingNo = wingNo,
+                    authorUsername = username,
             )
             posts.document(postId).set(post).await()
             Resource.Success(Any())
@@ -59,47 +62,47 @@ class DefaultMainRepository : MainRepository {
     }
 
     override suspend fun createNgoPost(imageUri: Uri, text: String, ngo: String) =
-        withContext(Dispatchers.IO) {
-            safeCall {
-                val uid = auth.uid!!
-                val postId = UUID.randomUUID().toString()
-                var apartmentName = ""
-                var wingNo = ""
-                var flatNo = ""
-                var phoneNumber = ""
-                val docRef = users.document(auth.uid!!.toString())
-                docRef.get().addOnSuccessListener {
-                    apartmentName = it?.getString("apartmentName").toString()
-                    wingNo = it?.getString("wingNo").toString()
-                    flatNo = it?.getString("flatNo").toString()
-                    phoneNumber = it?.getString("phoneNumber").toString()
-                }.addOnFailureListener {
-                    Log.d("TAG", "ID:TAG\t" + it.message.toString())
+            withContext(Dispatchers.IO) {
+                safeCall {
+                    val uid = auth.uid!!
+                    val postId = UUID.randomUUID().toString()
+                    var apartmentName = ""
+                    var wingNo = ""
+                    var flatNo = ""
+                    var phoneNumber = ""
+                    val docRef = users.document(auth.uid!!.toString())
+                    docRef.get().addOnSuccessListener {
+                        apartmentName = it?.getString("apartmentName").toString()
+                        wingNo = it?.getString("wingNo").toString()
+                        flatNo = it?.getString("flatNo").toString()
+                        phoneNumber = it?.getString("phoneNumber").toString()
+                    }.addOnFailureListener {
+                        Log.d("TAG", "ID:TAG\t" + it.message.toString())
+                    }
+                    val imageUploadResult = storage.getReference(postId).putFile(imageUri).await()
+                    val imageUrl = imageUploadResult?.metadata?.reference?.downloadUrl?.await()
+                            .toString()
+                    val ngoPost = NgoPost(
+                            id = postId,
+                            authorUid = uid,
+                            ngo = ngo,
+                            text = text,
+                            imageUrl = imageUrl,
+                            date = System.currentTimeMillis(),
+                            apartmentName = apartmentName,
+                            wingNo = wingNo,
+                            flatNo = flatNo,
+                            phoneNumber = phoneNumber,
+                    )
+                    ngoPosts.document(postId).set(ngoPost).await()
+                    Resource.Success(Any())
                 }
-                val imageUploadResult = storage.getReference(postId).putFile(imageUri).await()
-                val imageUrl = imageUploadResult?.metadata?.reference?.downloadUrl?.await()
-                    .toString()
-                val ngoPost = NgoPost(
-                    id = postId,
-                    authorUid = uid,
-                    ngo = ngo,
-                    text = text,
-                    imageUrl = imageUrl,
-                    date = System.currentTimeMillis(),
-                    apartmentName = apartmentName,
-                    wingNo = wingNo,
-                    flatNo = flatNo,
-                    phoneNumber = phoneNumber,
-                )
-                ngoPosts.document(postId).set(ngoPost).await()
-                Resource.Success(Any())
             }
-        }
 
     override suspend fun getUsers(uids: List<String>) = withContext(Dispatchers.IO) {
         safeCall {
             val userList = users.whereIn("uid", uids).orderBy("username").get().await()
-                .toObjects(User::class.java)
+                    .toObjects(User::class.java)
             Resource.Success(userList)
         }
     }
@@ -108,10 +111,10 @@ class DefaultMainRepository : MainRepository {
 
         safeCall {
             val user = users.document(uid).get().await().toObject(User::class.java)
-                ?: throw IllegalStateException()
+                    ?: throw IllegalStateException()
             val currentUid = FirebaseAuth.getInstance().uid!!
             val currentUser = users.document(currentUid).get().await().toObject(User::class.java)
-                ?: throw IllegalStateException()
+                    ?: throw IllegalStateException()
 
             user.isFollowing = uid in currentUser.follows
             Resource.Success(user)
@@ -123,16 +126,16 @@ class DefaultMainRepository : MainRepository {
             val uid = FirebaseAuth.getInstance().uid!!
             val follows = getUser(uid).data!!.follows
             val allPosts = posts.whereIn("authorUid", follows)
-                .orderBy("date", Query.Direction.DESCENDING)
-                .get()
-                .await()
-                .toObjects(Post::class.java)
-                .onEach { post ->
-                    val user = getUser(post.authorUid).data!!
-                    post.authorProfilePicture = user.profilePicture
-                    post.authorUsername = user.username
-                    post.isUpVoted = uid in post.upVotedBy
-                }
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .get()
+                    .await()
+                    .toObjects(Post::class.java)
+                    .onEach { post ->
+                        val user = getUser(post.authorUid).data!!
+                        post.authorProfilePicture = user.profilePicture
+                        post.authorUsername = user.username
+                        post.isUpVoted = uid in post.upVotedBy
+                    }
             Resource.Success(allPosts)
         }
     }
@@ -140,16 +143,16 @@ class DefaultMainRepository : MainRepository {
     override suspend fun getPostForProfile(uid: String) = withContext(Dispatchers.IO) {
         safeCall {
             val profilePosts = posts.whereEqualTo("authorUid", uid)
-                .orderBy("date", Query.Direction.DESCENDING)
-                .get()
-                .await()
-                .toObjects(Post::class.java)
-                .onEach { post ->
-                    val user = getUser(post.authorUid).data!!
-                    post.authorProfilePicture = user.profilePicture
-                    post.authorUsername = user.username
-                    post.isUpVoted = uid in post.upVotedBy
-                }
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .get()
+                    .await()
+                    .toObjects(Post::class.java)
+                    .onEach { post ->
+                        val user = getUser(post.authorUid).data!!
+                        post.authorProfilePicture = user.profilePicture
+                        post.authorUsername = user.username
+                        post.isUpVoted = uid in post.upVotedBy
+                    }
             Resource.Success(profilePosts)
         }
     }
@@ -157,10 +160,10 @@ class DefaultMainRepository : MainRepository {
     override suspend fun searchUser(query: String) = withContext(Dispatchers.IO) {
         safeCall {
             val userResults = users.whereGreaterThanOrEqualTo(
-                "username",
-                query.toUpperCase(Locale.ROOT)
+                    "username",
+                    query.toUpperCase(Locale.ROOT)
             )
-                .get().await().toObjects(User::class.java)
+                    .get().await().toObjects(User::class.java)
             Resource.Success(userResults)
         }
     }
@@ -171,7 +174,7 @@ class DefaultMainRepository : MainRepository {
             var isFollowing = false
             fireStore.runTransaction { transaction ->
                 val currentUser =
-                    transaction.get(users.document(currentUid)).toObject(User::class.java)!!
+                        transaction.get(users.document(currentUid)).toObject(User::class.java)!!
                 isFollowing = uid in currentUser.follows
                 val newFollows = if (isFollowing)
                     currentUser.follows - uid
@@ -191,13 +194,13 @@ class DefaultMainRepository : MainRepository {
                 val postResult = transaction.get(posts.document(post.id))
                 val currentUpVotes = postResult.toObject(Post::class.java)?.upVotedBy ?: listOf()
                 transaction.update(
-                    posts.document(post.id),
-                    "upVotedBy",
-                    if (uid in currentUpVotes) currentUpVotes - uid
-                    else {
-                        isUpVoted = true
-                        currentUpVotes + uid
-                    }
+                        posts.document(post.id),
+                        "upVotedBy",
+                        if (uid in currentUpVotes) currentUpVotes - uid
+                        else {
+                            isUpVoted = true
+                            currentUpVotes + uid
+                        }
                 )
             }.await()
             Resource.Success(isUpVoted)
@@ -213,37 +216,37 @@ class DefaultMainRepository : MainRepository {
     }
 
     override suspend fun createComment(commentText: String, postId: String) =
-        withContext(Dispatchers.IO) {
-            safeCall {
-                val uid = auth.uid!!
-                val commentId = UUID.randomUUID().toString()
-                val user = getUser(uid).data!!
-                val comment = Comment(
-                    commentId,
-                    postId,
-                    uid,
-                    user.username,
-                    user.profilePicture,
-                    commentText,
-                )
-                comments.document(commentId).set(comment).await()
-                Resource.Success(comment)
+            withContext(Dispatchers.IO) {
+                safeCall {
+                    val uid = auth.uid!!
+                    val commentId = UUID.randomUUID().toString()
+                    val user = getUser(uid).data!!
+                    val comment = Comment(
+                            commentId,
+                            postId,
+                            uid,
+                            user.username,
+                            user.profilePicture,
+                            commentText,
+                    )
+                    comments.document(commentId).set(comment).await()
+                    Resource.Success(comment)
+                }
             }
-        }
 
     override suspend fun getCommentsForPost(postId: String) = withContext(Dispatchers.IO) {
         safeCall {
             val commentForPost = comments
-                .whereEqualTo("postId", postId)
-                .orderBy("date", Query.Direction.DESCENDING)
-                .get()
-                .await()
-                .toObjects(Comment::class.java)
-                .onEach { comment ->
-                    val user = getUser(comment.uid).data!!
-                    comment.username = user.username
-                    comment.profilePictureUrl = user.profilePicture
-                }
+                    .whereEqualTo("postId", postId)
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .get()
+                    .await()
+                    .toObjects(Comment::class.java)
+                    .onEach { comment ->
+                        val user = getUser(comment.uid).data!!
+                        comment.username = user.username
+                        comment.profilePictureUrl = user.profilePicture
+                    }
             Resource.Success(commentForPost)
         }
     }
@@ -256,14 +259,14 @@ class DefaultMainRepository : MainRepository {
     }
 
     override suspend fun updateProfilePicture(uid: String, imageUri: Uri) =
-        withContext(Dispatchers.IO) {
-            val storageRef = storage.getReference(uid)
-            val user = getUser(uid).data!!
-            if (user.profilePicture != DEFAULT_PROFILE_PICTURE_URL) {
-                storage.getReferenceFromUrl(user.profilePicture).delete().await()
+            withContext(Dispatchers.IO) {
+                val storageRef = storage.getReference(uid)
+                val user = getUser(uid).data!!
+                if (user.profilePicture != DEFAULT_PROFILE_PICTURE_URL) {
+                    storage.getReferenceFromUrl(user.profilePicture).delete().await()
+                }
+                storageRef.putFile(imageUri).await().metadata?.reference?.downloadUrl?.await()
             }
-            storageRef.putFile(imageUri).await().metadata?.reference?.downloadUrl?.await()
-        }
 
     override suspend fun updateProfile(profileUpdate: ProfileUpdate) = withContext(Dispatchers.IO) {
         safeCall {
@@ -271,8 +274,8 @@ class DefaultMainRepository : MainRepository {
                 updateProfilePicture(profileUpdate.uidToUpdate, uri).toString()
             }
             val map = mutableMapOf(
-                "username" to profileUpdate.username,
-                "description" to profileUpdate.description
+                    "username" to profileUpdate.username,
+                    "description" to profileUpdate.description
             )
             imageUrl?.let { url ->
                 map["profilePictureUrl"] = url

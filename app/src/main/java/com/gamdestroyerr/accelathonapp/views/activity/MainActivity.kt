@@ -44,6 +44,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 finish()
             }
+            R.id.settingsFragment -> {
+                nav.findNavController().navigate(R.id.globalActionToSettingFragment)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
