@@ -3,6 +3,7 @@ package com.gamdestroyerr.accelathonapp.repositories
 import android.net.Uri
 import android.util.Log
 import com.gamdestroyerr.accelathonapp.model.Comment
+import com.gamdestroyerr.accelathonapp.model.NgoPost
 import com.gamdestroyerr.accelathonapp.model.Post
 import com.gamdestroyerr.accelathonapp.model.User
 import com.gamdestroyerr.accelathonapp.util.Resource
@@ -27,6 +28,7 @@ class DefaultMainRepository : MainRepository {
     private val users = fireStore.collection("users")
     private val posts = fireStore.collection("posts")
     private val comments = fireStore.collection("comments")
+    private val ngoPosts = fireStore.collection("ngoPost")
 
     override suspend fun createPost(imageUri: Uri, text: String) = withContext(Dispatchers.IO) {
         safeCall {
@@ -54,6 +56,37 @@ class DefaultMainRepository : MainRepository {
                     wingNo = wingNo,
             )
             posts.document(postId).set(post).await()
+            Resource.Success(Any())
+        }
+    }
+
+    override suspend fun createNgoPost(imageUri: Uri, text: String, ngo: String) = withContext(Dispatchers.IO) {
+        safeCall {
+            val uid = auth.uid!!
+            val postId = UUID.randomUUID().toString()
+            var apartmentName = ""
+            var wingNo = ""
+            val docRef = users.document(auth.uid!!.toString())
+            docRef.get().addOnSuccessListener {
+                apartmentName = it?.getString("apartmentName").toString()
+                wingNo = it?.getString("wingNo").toString()
+            }.addOnFailureListener {
+                Log.d("TAG", "ID:TAG\t" + it.message.toString())
+            }
+            val imageUploadResult = storage.getReference(postId).putFile(imageUri).await()
+            val imageUrl = imageUploadResult?.metadata?.reference?.downloadUrl?.await()
+                    .toString()
+            val ngoPost = NgoPost(
+                    id = postId,
+                    authorUid = uid,
+                    ngo = ngo,
+                    text = text,
+                    imageUrl = imageUrl,
+                    date = System.currentTimeMillis(),
+                    apartmentName = apartmentName,
+                    wingNo = wingNo,
+            )
+            ngoPosts.document(postId).set(ngoPost).await()
             Resource.Success(Any())
         }
     }

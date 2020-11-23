@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.FragmentShareBinding
+import com.gamdestroyerr.accelathonapp.util.snackBar
 import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
 
 class ShareFragment : Fragment(R.layout.fragment_share) {
@@ -21,6 +22,9 @@ class ShareFragment : Fragment(R.layout.fragment_share) {
         navController = Navigation.findNavController(view)
         shareBinding.shareWithNgoContainer.setOnClickListener {
             navController.navigate(R.id.action_shareFragment_to_shareToNgoFragment)
+        }
+        shareBinding.shareWithResidentsContainer.setOnClickListener {
+            snackBar("This is not implemented yet")
         }
     }
 }
