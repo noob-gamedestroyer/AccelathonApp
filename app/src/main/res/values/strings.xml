@@ -50,4 +50,5 @@
     <string name="unfollow">UnFollow</string>
     <string name="enter_comment">Enter comment...</string>
     <string name="todo">TODO</string>
+    <string name="enter_the_ngo_you_want_to_donate_to">Enter the NGO you want to donate to...</string>
 </resources>

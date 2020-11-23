@@ -53,8 +53,8 @@ class MakeRequestFragment : Fragment(R.layout.make_request_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cropContent = registerForActivityResult(cropActivityResultContract) {
-            it?.let {
-                viewModel.setCurImageUri(it)
+            it?.let { uri ->
+                viewModel.setCurImageUri(uri)
             }
         }
     }
@@ -63,7 +63,7 @@ class MakeRequestFragment : Fragment(R.layout.make_request_fragment) {
         super.onViewCreated(view, savedInstanceState)
         requestBinding = MakeRequestFragmentBinding.bind(view)
         val activity = activity as MainActivity
-        activity.binding.addFab.hide()
+        activity.binding.addFab.isEnabled = false
         subscribeToObservers()
 
         requestBinding.apply {
