@@ -70,21 +70,24 @@ class DefaultMainRepository : MainRepository {
                     var wingNo = ""
                     var flatNo = ""
                     var phoneNumber = ""
+                    var authorUsername = ""
                     val docRef = users.document(auth.uid!!.toString())
                     docRef.get().addOnSuccessListener {
                         apartmentName = it?.getString("apartmentName").toString()
                         wingNo = it?.getString("wingNo").toString()
                         flatNo = it?.getString("flatNo").toString()
                         phoneNumber = it?.getString("phoneNumber").toString()
+                        authorUsername = it?.getString("username").toString()
                     }.addOnFailureListener {
                         Log.d("TAG", "ID:TAG\t" + it.message.toString())
-                    }
+                    }.await()
                     val imageUploadResult = storage.getReference(postId).putFile(imageUri).await()
                     val imageUrl = imageUploadResult?.metadata?.reference?.downloadUrl?.await()
                             .toString()
                     val ngoPost = NgoPost(
                             id = postId,
                             authorUid = uid,
+                            authorUsername = authorUsername,
                             ngo = ngo,
                             text = text,
                             imageUrl = imageUrl,
@@ -121,11 +124,17 @@ class DefaultMainRepository : MainRepository {
         }
     }
 
-    override suspend fun getPostForFollows() = withContext(Dispatchers.IO) {
+    override suspend fun getPostForApartment() = withContext(Dispatchers.IO) {
         safeCall {
             val uid = FirebaseAuth.getInstance().uid!!
-            val follows = getUser(uid).data!!.follows
-            val allPosts = posts.whereIn("authorUid", follows)
+            val docRef = users.document(auth.uid!!.toString())
+            var apartmentName = ""
+            docRef.get().addOnSuccessListener {
+                apartmentName = it?.get("apartmentName").toString()
+            }.await()
+
+
+            val allPosts = posts.whereEqualTo("apartmentName", apartmentName)
                     .orderBy("date", Query.Direction.DESCENDING)
                     .get()
                     .await()

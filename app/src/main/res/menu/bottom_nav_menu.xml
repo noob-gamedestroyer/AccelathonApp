@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/ic_baseline_home_24" />
 
     <item
         android:id="@+id/searchFragment"
-        android:title="Search"
+        android:title="@string/search"
         android:icon="@drawable/ic_search_black_24dp" />
 
     <item
-        android:id="@+id/hidedable"
+        android:id="@+id/hidden"
         android:title="" />
 
     <item
         android:id="@+id/profileFragment"
-        android:title="Profile"
+        android:title="@string/profile"
         android:icon="@drawable/ic_round_person_24" />
 
     <item
-        android:id="@+id/settingsFragment"
-        android:title="Settings"
-        android:icon="@drawable/ic_round_settings_24" />
+        android:id="@+id/communitiesFragment"
+        android:title="@string/services"
+        android:icon="@drawable/ic_round_business_24" />
 
 </menu>

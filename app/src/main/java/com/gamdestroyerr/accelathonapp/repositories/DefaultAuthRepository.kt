@@ -14,6 +14,7 @@ class DefaultAuthRepository : AuthRepository {
 
     private val auth = FirebaseAuth.getInstance()
     private val users = FirebaseFirestore.getInstance().collection("users")
+    private val user = FirebaseFirestore.getInstance().collection("ngoUsers")
 
     override suspend fun register(
         email: String,

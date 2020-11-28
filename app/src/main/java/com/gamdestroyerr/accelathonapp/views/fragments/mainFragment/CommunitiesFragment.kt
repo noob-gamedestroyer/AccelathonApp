@@ -7,6 +7,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.gamdestroyerr.accelathonapp.R
 import com.gamdestroyerr.accelathonapp.databinding.FragmentAddOptionsModalDialogBinding
+import com.gamdestroyerr.accelathonapp.databinding.FragmentCommunitiesBinding
+import com.gamdestroyerr.accelathonapp.util.snackBar
 import com.gamdestroyerr.accelathonapp.views.activity.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -15,9 +17,11 @@ class CommunitiesFragment: Fragment(R.layout.fragment_communities){
 
     private lateinit var  navController: NavController
     private lateinit var bindingDialog: FragmentAddOptionsModalDialogBinding
+    private lateinit var communitiesBinding: FragmentCommunitiesBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        communitiesBinding = FragmentCommunitiesBinding.bind(view)
         bindingDialog = FragmentAddOptionsModalDialogBinding.inflate(layoutInflater)
         navController = Navigation.findNavController(view)
         val activity = activity as MainActivity
@@ -50,5 +54,24 @@ class CommunitiesFragment: Fragment(R.layout.fragment_communities){
 
             }
         }
+
+        communitiesBinding.apply {
+            materialCardView.setOnClickListener {
+                snackBar(getString(R.string.future_impl))
+            }
+
+            materialCardView2.setOnClickListener {
+                snackBar(getString(R.string.future_impl))
+            }
+
+            materialCardView3.setOnClickListener {
+                snackBar(getString(R.string.future_impl))
+            }
+
+            materialCardView4.setOnClickListener {
+                snackBar(getString(R.string.future_impl))
+            }
+        }
+
     }
 }

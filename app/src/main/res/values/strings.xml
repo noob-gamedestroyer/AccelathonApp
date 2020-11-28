@@ -3,7 +3,6 @@
     <string name="home_nav">HomeNav</string>
     <string name="communities_nav">CommunitiesNav</string>
     <string name="add_fab">addFab</string>
-    <string name="home">Home</string>
     <string name="community">Community</string>
     <string name="what_do_you_want_to_request">What do you want to request?</string>
     <string name="ask_your_fellow_community_members_anything">Ask your fellow community members anything…</string>
@@ -54,4 +53,13 @@
     <string name="edit_your_profile">Edit Your Profile</string>
     <string name="profile_updated">Profile Updated</string>
     <string name="update_profile">Update Profile</string>
+    <string name="organize_meetups">Organize Meetups</string>
+    <string name="organize_events">Organize Events</string>
+    <string name="lost_and_found">Lost and Found</string>
+    <string name="residents">Residents</string>
+    <string name="future_impl">We are actively working on implementing this feature.</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="services">Services</string>
 </resources>

@@ -28,7 +28,7 @@ class HomeViewModel @ViewModelInject constructor(
     override fun getPosts(uid: String) {
         _posts.postValue(Event(Resource.Loading()))
         viewModelScope.launch(dispatcher) {
-            val result = repository.getPostForFollows()
+            val result = repository.getPostForApartment()
             _posts.postValue(Event(result))
         }
     }

@@ -72,16 +72,19 @@ class AuthViewModel @ViewModelInject constructor(
 
         viewModelScope.launch(dispatchers) {
             val result = repository.register(
-                email,
-                username,
-                password,
-                phoneNumber,
-                apartment,
-                wing,
-                flat,
+                    email,
+                    username,
+                    password,
+                    phoneNumber,
+                    apartment,
+                    wing,
+                    flat,
             )
             _registerStatus.postValue(Event(result))
         }
     }
 
+    fun checkUid() {
+
+    }
 }
