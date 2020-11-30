@@ -24,7 +24,7 @@ class ShareFragment : Fragment(R.layout.fragment_share) {
             navController.navigate(R.id.action_shareFragment_to_shareToNgoFragment)
         }
         shareBinding.shareWithResidentsContainer.setOnClickListener {
-            snackBar("This is not implemented yet")
+            snackBar(getString(R.string.future_impl))
         }
     }
 }
